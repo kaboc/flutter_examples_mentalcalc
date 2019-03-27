@@ -34,7 +34,7 @@ class CalcScreen extends StatelessWidget {
         return Opacity(
           opacity: model.isBtnVisible ? 1.0 : 0.0,
           child: RaisedButton(
-            child: Text('スタート'),
+            child: const Text('スタート'),
             onPressed: model.start,
           ),
         );

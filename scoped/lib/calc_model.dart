@@ -24,7 +24,7 @@ class CalcModel extends Model {
 
     Timer.periodic(Duration(seconds: 1), (Timer t) {
       if (t.tick < _repeat + 1) {
-        var num = Random().nextInt(99) + 1;
+        final num = Random().nextInt(99) + 1;
         _lastOutput = '$num';
         _sum += num;
       } else {

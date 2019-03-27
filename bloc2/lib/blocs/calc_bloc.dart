@@ -1,6 +1,6 @@
-import 'package:bloc_provider/bloc_provider.dart';
 import 'dart:async';
 import 'dart:math' show Random;
+import 'package:bloc_provider/bloc_provider.dart';
 
 class CalcBloc implements Bloc {
   final _calcController = StreamController<int>();
@@ -41,7 +41,7 @@ class CalcBloc implements Bloc {
   }
 
   @override
-  void dispose() async {
+  Future<void> dispose() async {
     await _calcController.close();
     await _outputController.close();
     await _btnController.close();
