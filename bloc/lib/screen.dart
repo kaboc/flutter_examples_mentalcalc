@@ -39,7 +39,7 @@ class CalcScreen extends StatelessWidget {
           opacity: snapshot.hasData && snapshot.data ? 1.0 : 0.0,
           child: RaisedButton(
             child: const Text('スタート'),
-            onPressed: bloc.start,
+            onPressed: () => bloc.start.add(null),
           ),
         );
       },

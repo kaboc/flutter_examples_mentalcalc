@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:math' show Random;
 
 class CalcBloc {
+  final _startController = StreamController<void>();
   final _calcController = StreamController<int>();
   final _outputController = StreamController<String>();
   final _btnController = StreamController<bool>();
 
+  Sink<void> get start => _startController.sink;
   Stream<String> get onAdd => _outputController.stream;
   Stream<bool> get onToggle => _btnController.stream;
 
@@ -14,22 +16,12 @@ class CalcBloc {
   Timer _timer;
 
   CalcBloc() {
-    _calcController.stream.listen((count) {
-      if (count < _repeat + 1) {
-        var num = Random().nextInt(99) + 1;
-        _outputController.sink.add('$num');
-        _sum += num;
-      } else {
-        _timer.cancel();
-        _outputController.sink.add('答えは$_sum');
-        _btnController.sink.add(true);
-      }
-    });
-
+    _startController.stream.listen((_) => _start());
+    _calcController.stream.listen((count) => _calc(count));
     _btnController.sink.add(true);
   }
 
-  void start() {
+  void _start() {
     _sum = 0;
     _outputController.sink.add('');
     _btnController.sink.add(false);
@@ -39,7 +31,20 @@ class CalcBloc {
     });
   }
 
+  void _calc(int count) {
+    if (count < _repeat + 1) {
+      final num = Random().nextInt(99) + 1;
+      _outputController.sink.add('$num');
+      _sum += num;
+    } else {
+      _timer.cancel();
+      _outputController.sink.add('答えは$_sum');
+      _btnController.sink.add(true);
+    }
+  }
+
   void dispose() {
+    _startController.close();
     _calcController.close();
     _outputController.close();
     _btnController.close();
