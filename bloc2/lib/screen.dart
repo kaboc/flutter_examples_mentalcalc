@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'blocs/calc_bloc_provider.dart';
+import 'calc_bloc.dart';
 
 class CalcScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bloc = CalcBlocProvider.of(context);
+    final bloc = BlocProvider.of<CalcBloc>(context);
 
     return Scaffold(
       body: Center(
