@@ -10,7 +10,7 @@ class CalcBloc implements Bloc {
   final _outputController = StreamController<String>();
   final _btnController = StreamController<bool>();
 
-  Sink<void> get start => _startController.sink;
+  StreamSink<void> get start => _startController.sink;
   Stream<String> get onAdd => _outputController.stream;
   Stream<bool> get onToggle => _btnController.stream;
 
@@ -47,10 +47,10 @@ class CalcBloc implements Bloc {
   }
 
   @override
-  Future<void> dispose() async {
-    await _startController.close();
-    await _calcController.close();
-    await _outputController.close();
-    await _btnController.close();
+  void dispose() {
+    _startController.close();
+    _calcController.close();
+    _outputController.close();
+    _btnController.close();
   }
 }

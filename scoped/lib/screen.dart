@@ -19,7 +19,7 @@ class CalcScreen extends StatelessWidget {
 
   Widget _text() {
     return ScopedModelDescendant<CalcModel>(
-      builder: (context, child, model) {
+      builder: (_, __, model) {
         return Text(
           model.output,
           style: TextStyle(fontSize: 38.0),
@@ -30,7 +30,7 @@ class CalcScreen extends StatelessWidget {
 
   Widget _button() {
     return ScopedModelDescendant<CalcModel>(
-      builder: (context, child, model) {
+      builder: (_, __, model) {
         return Opacity(
           opacity: model.isBtnVisible ? 1.0 : 0.0,
           child: RaisedButton(

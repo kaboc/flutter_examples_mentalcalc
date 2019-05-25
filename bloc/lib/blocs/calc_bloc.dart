@@ -7,7 +7,7 @@ class CalcBloc {
   final _outputController = StreamController<String>();
   final _btnController = StreamController<bool>();
 
-  Sink<void> get start => _startController.sink;
+  StreamSink<void> get start => _startController.sink;
   Stream<String> get onAdd => _outputController.stream;
   Stream<bool> get onToggle => _btnController.stream;
 
