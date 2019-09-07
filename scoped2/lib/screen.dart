@@ -10,36 +10,32 @@ class CalcScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _text(),
-            _button(),
+            _text(context),
+            _button(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _text() {
-    return Consumer<CalcModel>(
-      builder: (_, model, __) {
-        return Text(
-          model.output,
-          style: TextStyle(fontSize: 38.0),
-        );
-      },
+  Widget _text(BuildContext context) {
+    final model = Provider.of<CalcModel>(context);
+
+    return Text(
+      model.output,
+      style: TextStyle(fontSize: 38.0),
     );
   }
 
-  Widget _button() {
-    return Consumer<CalcModel>(
-      builder: (_, model, __) {
-        return Opacity(
-          opacity: model.isBtnVisible ? 1.0 : 0.0,
-          child: RaisedButton(
-            child: const Text('スタート'),
-            onPressed: model.start,
-          ),
-        );
-      },
+  Widget _button(BuildContext context) {
+    final model = Provider.of<CalcModel>(context);
+
+    return Opacity(
+      opacity: model.isBtnVisible ? 1.0 : 0.0,
+      child: RaisedButton(
+        child: const Text('スタート'),
+        onPressed: model.start,
+      ),
     );
   }
 }
