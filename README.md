@@ -17,6 +17,9 @@ This repository contains examples used in my articles below:
 * bloc3  
   An example of the BLoC pattern powered by the [provider](https://pub.dev/packages/provider) package.
 
+* bloc4  
+  An example of the BLoC pattern with less complicated BLoC powered by the [provider](https://pub.dev/packages/provider) package.
+
 * scoped  
   An example of the Scoped Model pattern powered by the [scoped_model](https://pub.dev/packages/scoped_model) package.
 
