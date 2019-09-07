@@ -3,7 +3,7 @@ import 'dart:math' show Random;
 import 'package:flutter/material.dart';
 
 class CalcModel with ChangeNotifier {
-  final _repeat = 6;
+  static const _repeat = 6;
   String _lastOutput = '';
   int _sum;
   bool _isBtnVisible = true;

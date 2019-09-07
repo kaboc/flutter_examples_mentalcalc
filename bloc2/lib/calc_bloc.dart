@@ -14,7 +14,7 @@ class CalcBloc implements Bloc {
   Stream<String> get onAdd => _outputController.stream;
   Stream<bool> get onToggle => _btnController.stream;
 
-  final _repeat = 6;
+  static const _repeat = 6;
   int _sum;
   Timer _timer;
 

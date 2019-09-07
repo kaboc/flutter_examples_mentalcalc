@@ -21,7 +21,7 @@ class CalcScreen extends StatelessWidget {
   }
 
   Widget _text(CalcBloc bloc) {
-    return StreamBuilder(
+    return StreamBuilder<String>(
       stream: bloc.onAdd,
       builder: (context, snapshot) {
         return Text(
@@ -33,7 +33,7 @@ class CalcScreen extends StatelessWidget {
   }
 
   Widget _button(CalcBloc bloc) {
-    return StreamBuilder(
+    return StreamBuilder<bool>(
       stream: bloc.onToggle,
       builder: (context, snapshot) {
         return Opacity(

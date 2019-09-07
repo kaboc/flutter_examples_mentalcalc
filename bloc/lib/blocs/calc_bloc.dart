@@ -11,7 +11,7 @@ class CalcBloc {
   Stream<String> get onAdd => _outputController.stream;
   Stream<bool> get onToggle => _btnController.stream;
 
-  final _repeat = 6;
+  static const _repeat = 6;
   int _sum;
   Timer _timer;
 
@@ -43,6 +43,8 @@ class CalcBloc {
     }
   }
 
+  // This method is not called automatically.
+  // See other BLoC pattern examples in this repository for solutions.
   void dispose() {
     _startController.close();
     _calcController.close();

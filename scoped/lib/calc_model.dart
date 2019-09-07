@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:math' show Random;
 import 'package:scoped_model/scoped_model.dart';
+
 export 'package:scoped_model/scoped_model.dart';
 
 class CalcModel extends Model {
-  final _repeat = 6;
+  static const _repeat = 6;
   String _lastOutput = '';
   int _sum;
   bool _isBtnVisible = true;
