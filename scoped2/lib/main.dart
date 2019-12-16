@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: ChangeNotifierProvider<CalcModel>(
-        builder: (_) => CalcModel(),
+        create: (_) => CalcModel(),
         child: CalcScreen(),
       ),
     );

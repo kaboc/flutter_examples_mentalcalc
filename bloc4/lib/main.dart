@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Provider<CalcBloc>(
-        builder: (_) => CalcBloc(),
+        create: (_) => CalcBloc(),
         dispose: (_, bloc) => bloc.dispose(),
         child: CalcScreen(),
       ),
