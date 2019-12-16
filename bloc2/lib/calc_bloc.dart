@@ -29,7 +29,7 @@ class CalcBloc implements Bloc {
     _outputController.sink.add('');
     _btnController.sink.add(false);
 
-    _timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       _calcController.sink.add(t.tick);
     });
   }

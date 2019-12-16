@@ -26,7 +26,7 @@ class CalcScreen extends StatelessWidget {
       builder: (context, snapshot) {
         return Text(
           snapshot.hasData ? snapshot.data : '',
-          style: TextStyle(fontSize: 38.0),
+          style: const TextStyle(fontSize: 38.0),
         );
       },
     );

@@ -13,6 +13,6 @@ class CalcBlocProvider extends InheritedWidget {
   bool updateShouldNotify(oldWidget) => false;
 
   static CalcBlocProvider of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(CalcBlocProvider);
+    return context.dependOnInheritedWidgetOfExactType<CalcBlocProvider>();
   }
 }

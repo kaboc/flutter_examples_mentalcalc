@@ -21,7 +21,7 @@ class CalcModel with ChangeNotifier {
   void start() {
     _reset();
 
-    Timer.periodic(Duration(seconds: 1), (Timer t) {
+    Timer.periodic(const Duration(seconds: 1), (Timer t) {
       if (t.tick < _repeat + 1) {
         final num = Random().nextInt(99) + 1;
         _lastOutput = '$num';

@@ -22,7 +22,7 @@ class CalcScreen extends StatelessWidget {
       builder: (_, __, model) {
         return Text(
           model.output,
-          style: TextStyle(fontSize: 38.0),
+          style: const TextStyle(fontSize: 38.0),
         );
       },
     );
