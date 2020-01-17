@@ -28,7 +28,7 @@ class CalcScreen extends StatelessWidget {
   }
 
   Widget _button(BuildContext context) {
-    final model = Provider.of<CalcModel>(context);
+    final model = Provider.of<CalcModel>(context, listen: false);
 
     return Opacity(
       opacity: model.isBtnVisible ? 1.0 : 0.0,
