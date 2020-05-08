@@ -20,6 +20,9 @@ This repository contains examples used in my articles below:
 * bloc4
   * An example of the BLoC pattern with less complicated BLoC powered by the [provider](https://pub.dev/packages/provider) package.
 
+* bloc5
+  * A more practical example of the BLoC pattern having two BLoCs with their related states and logic separated. 
+
 * scoped
   * An example of the Scoped Model pattern powered by the [scoped_model](https://pub.dev/packages/scoped_model) package.
 
