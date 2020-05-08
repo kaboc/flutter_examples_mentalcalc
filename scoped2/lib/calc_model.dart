@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:math' show Random;
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class CalcModel with ChangeNotifier {
   static const _repeat = 6;
