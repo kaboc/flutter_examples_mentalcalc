@@ -41,7 +41,7 @@ class CalcBloc implements Bloc {
       _sum += num;
     } else {
       _timer.cancel();
-      _outputController.sink.add('答えは$_sum');
+      _outputController.sink.add('Answer: $_sum');
       _btnController.sink.add(true);
     }
   }

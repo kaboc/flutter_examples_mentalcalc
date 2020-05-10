@@ -30,7 +30,7 @@ class CalcModel extends Model {
         _sum += num;
       } else {
         t.cancel();
-        _lastOutput = '答えは$_sum';
+        _lastOutput = 'Answer: $_sum';
         _isBtnVisible = true;
       }
 
