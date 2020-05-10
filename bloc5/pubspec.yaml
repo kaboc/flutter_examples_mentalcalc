@@ -4,13 +4,13 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.3.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  provider: ^4.1.0
+  provider: 4.1.1
   rxdart: ^0.24.0
 
 flutter:
