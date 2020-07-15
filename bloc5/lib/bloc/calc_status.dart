@@ -1,4 +1,0 @@
-enum CalcStatus {
-  stop,
-  play,
-}

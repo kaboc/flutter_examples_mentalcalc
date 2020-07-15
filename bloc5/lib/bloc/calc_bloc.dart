@@ -1,61 +1,69 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
-import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'package:bloc5/bloc/calc_status.dart';
-import 'package:bloc5/dto/record_data.dart';
+import 'package:bloc5/bloc/record_bloc.dart';
+import 'package:bloc5/common/challenge_status.dart';
 import 'package:bloc5/model/calc_model.dart';
-import 'package:bloc5/model/record_model.dart';
 
-export 'package:bloc5/bloc/calc_status.dart';
+export 'package:bloc5/common/challenge_status.dart';
 
 class CalcBloc {
-  CalcBloc({@required Locator locator})
-      : _calcModel = locator<CalcModel>(),
-        _recordModel = locator<RecordModel>() {
-    _startController.stream.listen((_) => _play());
+  CalcBloc({@required this.calcModel, @required this.recordBloc}) {
+    _startController.stream.listen((_) {
+      if (_status != ChallengeStatus.challenge) {
+        _challenge();
+      }
+    });
   }
 
-  final CalcModel _calcModel;
-  final RecordModel _recordModel;
+  final CalcModel calcModel;
+  final RecordBloc recordBloc;
 
   final _startController = PublishSubject<void>();
-  final _statusController = PublishSubject<CalcStatus>();
+  final _statusController = PublishSubject<ChallengeStatus>();
   final _valueController = PublishSubject<int>();
-  final _recordController = BehaviorSubject<RecordData>.seeded(RecordData.none);
 
   StreamSink<void> get start => _startController.sink;
-  Stream<CalcStatus> get status => _statusController.stream;
-  Stream<int> get onNextValue => _valueController.stream;
-  Stream<RecordData> get record => _recordController.stream;
+  Stream<ChallengeStatus> get status => _statusController.stream;
+  Stream<int> get value => _valueController.stream;
+
+  ChallengeStatus _status = ChallengeStatus.none;
 
   void dispose() {
     _startController.close();
     _statusController.close();
     _valueController.close();
-    _recordController.close();
   }
 
-  void _play() {
-    _calcModel.reset();
+  void _challenge() {
+    final numbers = calcModel.generateNumbers();
 
+    _init();
+
+    calcModel.challenge(
+      numbers: numbers,
+      onNext: (number) => _onNext(number),
+      onEnd: () => _onEnd(numbers),
+    );
+  }
+
+  void _init() {
     _valueController.sink.add(0);
-    _statusController.sink.add(CalcStatus.play);
+    _updateStatus(ChallengeStatus.challenge);
+  }
 
-    Timer.periodic(const Duration(seconds: 1), (Timer t) {
-      if (_calcModel.isEnd(t.tick)) {
-        t.cancel();
+  void _updateStatus(ChallengeStatus status) {
+    _status = status;
+    _statusController.sink.add(_status);
+  }
 
-        _recordModel.recordLastChallenge(_calcModel.list);
-        _recordController.sink.add(RecordData(_recordModel));
+  void _onNext(int number) {
+    _valueController.sink.add(number);
+  }
 
-        _valueController.sink.add(_calcModel.sum);
-        _statusController.sink.add(CalcStatus.stop);
-      } else {
-        final value = _calcModel.nextValue();
-        _valueController.sink.add(value);
-      }
-    });
+  void _onEnd(List<int> numbers) {
+    recordBloc.update.add(numbers);
+    _updateStatus(ChallengeStatus.result);
   }
 }

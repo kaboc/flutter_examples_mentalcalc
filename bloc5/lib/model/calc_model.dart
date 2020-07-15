@@ -1,25 +1,37 @@
+import 'dart:async';
 import 'dart:math' show Random;
+import 'package:flutter/foundation.dart';
+
+const _kRepeat = 6;
+const _kMaxValue = 99;
 
 class CalcModel {
-  static const _kRepeat = 6;
-  static const _kMaxValue = 99;
+  List<int> generateNumbers() {
+    final numbers = <int>[];
 
-  final _list = <int>[];
+    for (int i = 0; i < _kRepeat; i++) {
+      final value = Random().nextInt(_kMaxValue) + 1;
+      numbers.add(value);
+    }
 
-  List<int> get list => _list;
-  int get sum => _list.fold<int>(0, (a, b) => a + b);
-
-  void reset() {
-    _list.clear();
+    return numbers;
   }
 
-  bool isEnd(int count) {
-    return count == _kRepeat + 1;
-  }
+  void challenge({
+    @required List<int> numbers,
+    @required void Function(int) onNext,
+    @required VoidCallback onEnd,
+  }) {
+    Timer.periodic(const Duration(seconds: 1), (Timer t) {
+      final index = t.tick - 1;
 
-  int nextValue() {
-    final value = Random().nextInt(_kMaxValue) + 1;
-    _list.add(value);
-    return value;
+      if (index < numbers.length) {
+        onNext(numbers[index]);
+      } else {
+        t.cancel();
+
+        onEnd();
+      }
+    });
   }
 }
