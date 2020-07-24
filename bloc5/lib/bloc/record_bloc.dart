@@ -1,24 +1,17 @@
 import 'dart:async';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'package:bloc5/model/record_model.dart';
 import 'package:bloc5/model/record_state.dart';
 
 export 'package:bloc5/model/record_state.dart';
 
 class RecordBloc {
-  RecordBloc({@required this.recordModel}) {
+  RecordBloc() {
     _updateController.stream.listen((numbers) async {
-      final newState = recordModel.update(
-        lastState: _recordController.value,
-        newNumbers: numbers,
-      );
+      final newState = _recordController.value.copyWith(numbers: numbers);
       _recordController.sink.add(newState);
     });
   }
-
-  final RecordModel recordModel;
 
   final _updateController = PublishSubject<List<int>>();
   final _recordController =

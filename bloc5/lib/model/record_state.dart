@@ -17,4 +17,16 @@ class RecordState extends Equatable {
 
   @override
   List<Object> get props => [times, numbers, sum];
+
+  RecordState copyWith({List<int> numbers}) {
+    return RecordState(
+      times: times + 1,
+      numbers: numbers ?? this.numbers,
+      sum: _sum(numbers),
+    );
+  }
+
+  int _sum(List<int> numbers) {
+    return numbers.fold<int>(0, (a, b) => a + b);
+  }
 }

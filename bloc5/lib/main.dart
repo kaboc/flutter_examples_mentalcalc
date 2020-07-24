@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:bloc5/bloc/calc_bloc.dart';
-import 'package:bloc5/model/calc_model.dart';
 import 'package:bloc5/bloc/record_bloc.dart';
-import 'package:bloc5/model/record_model.dart';
+import 'package:bloc5/model/calc_model.dart';
 import 'package:bloc5/screen/home.dart';
 
 void main() => runApp(MyApp());
@@ -15,9 +14,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<RecordBloc>(
-          create: (context) => RecordBloc(
-            recordModel: RecordModel(),
-          ),
+          create: (context) => RecordBloc(),
           dispose: (_, bloc) => bloc.dispose(),
         ),
         Provider<CalcBloc>(
