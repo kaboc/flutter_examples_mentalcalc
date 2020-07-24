@@ -3,15 +3,15 @@ import 'dart:math' show Random;
 import 'package:flutter/foundation.dart';
 
 const _kRepeat = 6;
-const _kMaxValue = 99;
+const _kMax = 99;
 
 class CalcModel {
   List<int> generateNumbers() {
     final numbers = <int>[];
 
     for (int i = 0; i < _kRepeat; i++) {
-      final value = Random().nextInt(_kMaxValue) + 1;
-      numbers.add(value);
+      final number = Random().nextInt(_kMax) + 1;
+      numbers.add(number);
     }
 
     return numbers;

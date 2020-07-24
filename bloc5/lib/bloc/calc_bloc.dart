@@ -22,18 +22,18 @@ class CalcBloc {
 
   final _startController = PublishSubject<void>();
   final _statusController = PublishSubject<ChallengeStatus>();
-  final _valueController = PublishSubject<int>();
+  final _numberController = PublishSubject<int>();
 
   StreamSink<void> get start => _startController.sink;
   Stream<ChallengeStatus> get status => _statusController.stream;
-  Stream<int> get value => _valueController.stream;
+  Stream<int> get number => _numberController.stream;
 
   ChallengeStatus _status = ChallengeStatus.none;
 
   void dispose() {
     _startController.close();
     _statusController.close();
-    _valueController.close();
+    _numberController.close();
   }
 
   void _challenge() {
@@ -49,7 +49,7 @@ class CalcBloc {
   }
 
   void _init() {
-    _valueController.sink.add(0);
+    _numberController.sink.add(0);
     _updateStatus(ChallengeStatus.challenge);
   }
 
@@ -59,7 +59,7 @@ class CalcBloc {
   }
 
   void _onNext(int number) {
-    _valueController.sink.add(number);
+    _numberController.sink.add(number);
   }
 
   void _onEnd(List<int> numbers) {

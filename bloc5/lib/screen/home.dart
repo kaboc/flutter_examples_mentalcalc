@@ -59,7 +59,7 @@ class _Challenge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<int>(
-      stream: context.watch<CalcBloc>().value,
+      stream: context.watch<CalcBloc>().number,
       initialData: 0,
       builder: (_, snapshot) {
         return snapshot.data == 0
