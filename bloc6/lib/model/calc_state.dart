@@ -7,21 +7,25 @@ import 'package:bloc6/common/challenge_status.dart';
 class CalcState extends Equatable {
   const CalcState({
     @required this.status,
-    @required this.number,
+    @required this.numbers,
+    @required this.index,
   });
 
   final ChallengeStatus status;
-  final int number;
+  final List<int> numbers;
+  final int index;
 
-  static const none = CalcState(status: ChallengeStatus.none, number: 0);
+  static const none =
+      CalcState(status: ChallengeStatus.none, numbers: [], index: 0);
 
   @override
-  List<Object> get props => [status, number];
+  List<Object> get props => [status, numbers, index];
 
-  CalcState copyWith({ChallengeStatus status, int number}) {
+  CalcState copyWith({ChallengeStatus status, List<int> numbers, int index}) {
     return CalcState(
       status: status ?? this.status,
-      number: number ?? this.number,
+      numbers: numbers ?? this.numbers,
+      index: index ?? this.index,
     );
   }
 }

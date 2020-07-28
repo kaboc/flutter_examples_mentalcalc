@@ -58,12 +58,12 @@ class _Challenge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CalcCubit, CalcState>(
-      buildWhen: (prevState, state) => state.number != prevState.number,
+      buildWhen: (prevState, state) => state.index != prevState.index,
       builder: (_, state) {
-        return state.number == 0
+        return state.index < 0
             ? const SizedBox.shrink()
             : Text(
-                state.number.toString(),
+                state.numbers[state.index].toString(),
                 style: const TextStyle(fontSize: 48.0),
               );
       },
