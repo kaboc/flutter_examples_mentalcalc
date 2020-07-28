@@ -7,7 +7,7 @@ export 'package:bloc5/model/record_state.dart';
 
 class RecordBloc {
   RecordBloc() {
-    _updateController.stream.listen((numbers) async {
+    _updateController.stream.listen((numbers) {
       final newState = _recordController.value.copyWith(numbers: numbers);
       _recordController.sink.add(newState);
     });
