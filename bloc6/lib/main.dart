@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         BlocProvider<RecordCubit>(
+          lazy: false,
           create: (context) => RecordCubit(
             calcCubit: context.bloc<CalcCubit>(),
           ),
