@@ -3,16 +3,18 @@ import 'package:provider/provider.dart';
 import 'calc_bloc.dart';
 import 'screen.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Provider<CalcBloc>(
+      home: Provider(
         create: (_) => CalcBloc(),
         dispose: (_, bloc) => bloc.dispose(),
-        child: CalcScreen(),
+        child: const CalcScreen(),
       ),
     );
   }

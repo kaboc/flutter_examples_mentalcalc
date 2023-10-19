@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'blocs/calc_provider.dart';
 
 class CalcScreen extends StatelessWidget {
+  const CalcScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final bloc = CalcBlocProvider.of(context).bloc;
+    final bloc = CalcBlocProvider.of(context)?.bloc;
 
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             _text(bloc),
             _button(bloc),
           ],
@@ -19,27 +21,27 @@ class CalcScreen extends StatelessWidget {
     );
   }
 
-  Widget _text(CalcBloc bloc) {
-    return StreamBuilder<String>(
-      stream: bloc.onAdd,
+  Widget _text(CalcBloc? bloc) {
+    return StreamBuilder(
+      stream: bloc?.onAdd,
       builder: (context, snapshot) {
         return Text(
-          snapshot.hasData ? snapshot.data : '',
+          snapshot.hasData ? snapshot.data! : '',
           style: const TextStyle(fontSize: 38.0),
         );
       },
     );
   }
 
-  Widget _button(CalcBloc bloc) {
-    return StreamBuilder<bool>(
-      stream: bloc.onToggle,
+  Widget _button(CalcBloc? bloc) {
+    return StreamBuilder(
+      stream: bloc?.onToggle,
       builder: (context, snapshot) {
-        return Opacity(
-          opacity: snapshot.hasData && snapshot.data ? 1.0 : 0.0,
-          child: RaisedButton(
+        return Visibility(
+          visible: snapshot.hasData && snapshot.data!,
+          child: ElevatedButton(
+            onPressed: () => bloc?.start.add(null),
             child: const Text('Start'),
-            onPressed: () => bloc.start.add(null),
           ),
         );
       },

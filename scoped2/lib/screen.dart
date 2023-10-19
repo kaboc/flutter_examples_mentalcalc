@@ -3,13 +3,15 @@ import 'package:provider/provider.dart';
 import 'calc_model.dart';
 
 class CalcScreen extends StatelessWidget {
+  const CalcScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             _text(context),
             _button(context),
           ],
@@ -30,11 +32,11 @@ class CalcScreen extends StatelessWidget {
   Widget _button(BuildContext context) {
     final model = Provider.of<CalcModel>(context, listen: false);
 
-    return Opacity(
-      opacity: model.isBtnVisible ? 1.0 : 0.0,
-      child: RaisedButton(
-        child: const Text('Start'),
+    return Visibility(
+      visible: model.isBtnVisible,
+      child: ElevatedButton(
         onPressed: model.start,
+        child: const Text('Start'),
       ),
     );
   }

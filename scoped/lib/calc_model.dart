@@ -7,7 +7,7 @@ export 'package:scoped_model/scoped_model.dart';
 class CalcModel extends Model {
   static const _repeat = 6;
   String _lastOutput = '';
-  int _sum;
+  int _sum = 0;
   bool _isBtnVisible = true;
 
   String get output => _lastOutput;
@@ -23,7 +23,7 @@ class CalcModel extends Model {
   void start() {
     _reset();
 
-    Timer.periodic(const Duration(seconds: 1), (Timer t) {
+    Timer.periodic(const Duration(seconds: 1), (t) {
       if (t.tick < _repeat + 1) {
         final num = Random().nextInt(99) + 1;
         _lastOutput = '$num';

@@ -9,15 +9,20 @@ class CalcBloc {
   Stream<bool> get onToggle => _btnController.stream;
 
   static const _repeat = 6;
-  int _sum;
-  Timer _timer;
+  int _sum = 0;
+  Timer? _timer;
+
+  void dispose() {
+    _outputController.close();
+    _btnController.close();
+  }
 
   void start() {
     _sum = 0;
     _outputController.sink.add('');
     _btnController.sink.add(false);
 
-    _timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (t) {
       _calc(t.tick);
     });
   }
@@ -28,14 +33,9 @@ class CalcBloc {
       _outputController.sink.add('$num');
       _sum += num;
     } else {
-      _timer.cancel();
+      _timer?.cancel();
       _outputController.sink.add('Answer: $_sum');
       _btnController.sink.add(true);
     }
-  }
-
-  void dispose() {
-    _outputController.close();
-    _btnController.close();
   }
 }

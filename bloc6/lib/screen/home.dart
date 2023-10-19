@@ -6,37 +6,41 @@ import 'package:bloc6/cubit/record_cubit.dart';
 import 'package:bloc6/screen/record.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CalcCubit, CalcState>(
       buildWhen: (prevState, state) => state.status != prevState.status,
-      builder: (_, state) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Add up the numbers!'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.info),
-              onPressed: () {
-                Navigator.of(context).push(RecordScreen.route());
-              },
-            )
-          ],
-        ),
-        body: Center(
-          child: {
-            ChallengeStatus.none: const _Init(),
-            ChallengeStatus.challenge: const _Challenge(),
-            ChallengeStatus.result: const _Result(),
-          }[state.status],
-        ),
-        floatingActionButton: Visibility(
-          visible: state.status != ChallengeStatus.challenge,
-          child: FloatingActionButton(
-            child: Icon(Icons.play_arrow),
-            onPressed: () => context.bloc<CalcCubit>().challenge(),
+      builder: (_, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Add up the numbers!'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.info),
+                onPressed: () {
+                  Navigator.of(context).push(RecordScreen.route());
+                },
+              )
+            ],
           ),
-        ),
-      ),
+          body: Center(
+            child: {
+              ChallengeStatus.none: const _Init(),
+              ChallengeStatus.challenge: const _Challenge(),
+              ChallengeStatus.result: const _Result(),
+            }[state.status],
+          ),
+          floatingActionButton: Visibility(
+            visible: state.status != ChallengeStatus.challenge,
+            child: FloatingActionButton(
+              onPressed: () => context.read<CalcCubit>().challenge(),
+              child: const Icon(Icons.play_arrow),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -63,7 +67,7 @@ class _Challenge extends StatelessWidget {
         return state.index < 0
             ? const SizedBox.shrink()
             : Text(
-                state.numbers[state.index].toString(),
+                '${state.numbers[state.index]}',
                 style: const TextStyle(fontSize: 48.0),
               );
       },
@@ -81,10 +85,10 @@ class _Result extends StatelessWidget {
       builder: (_, state) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             const Text('Answer'),
             Text(
-              state.sum.toString(),
+              '${state.sum}',
               style: const TextStyle(fontSize: 48.0),
             ),
           ],

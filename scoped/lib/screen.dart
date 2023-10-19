@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'calc_model.dart';
 
 class CalcScreen extends StatelessWidget {
+  const CalcScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             _text(),
             _button(),
           ],
@@ -31,11 +33,11 @@ class CalcScreen extends StatelessWidget {
   Widget _button() {
     return ScopedModelDescendant<CalcModel>(
       builder: (_, __, model) {
-        return Opacity(
-          opacity: model.isBtnVisible ? 1.0 : 0.0,
-          child: RaisedButton(
-            child: const Text('Start'),
+        return Visibility(
+          visible: model.isBtnVisible,
+          child: ElevatedButton(
             onPressed: model.start,
+            child: const Text('Start'),
           ),
         );
       },

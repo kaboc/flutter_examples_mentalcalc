@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'calc_bloc.dart';
 
 class CalcScreen extends StatelessWidget {
+  const CalcScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of<CalcBloc>(context);
@@ -11,7 +13,7 @@ class CalcScreen extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             _text(bloc),
             _button(bloc),
           ],
@@ -21,11 +23,11 @@ class CalcScreen extends StatelessWidget {
   }
 
   Widget _text(CalcBloc bloc) {
-    return StreamBuilder<String>(
+    return StreamBuilder(
       stream: bloc.onAdd,
       builder: (context, snapshot) {
         return Text(
-          snapshot.hasData ? snapshot.data : '',
+          snapshot.hasData ? snapshot.data! : '',
           style: const TextStyle(fontSize: 38.0),
         );
       },
@@ -33,15 +35,15 @@ class CalcScreen extends StatelessWidget {
   }
 
   Widget _button(CalcBloc bloc) {
-    return StreamBuilder<bool>(
+    return StreamBuilder(
       stream: bloc.onToggle,
       initialData: true,
       builder: (context, snapshot) {
-        return Opacity(
-          opacity: snapshot.hasData && snapshot.data ? 1.0 : 0.0,
-          child: RaisedButton(
-            child: const Text('Start'),
+        return Visibility(
+          visible: snapshot.hasData && snapshot.data!,
+          child: ElevatedButton(
             onPressed: () => bloc.start(),
+            child: const Text('Start'),
           ),
         );
       },

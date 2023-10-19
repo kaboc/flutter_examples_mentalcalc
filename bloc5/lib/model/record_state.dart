@@ -1,9 +1,7 @@
-import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
-@immutable
 class RecordState extends Equatable {
-  const RecordState({@required this.times, @required this.numbers});
+  const RecordState({required this.times, required this.numbers});
 
   final int times;
   final List<int> numbers;
@@ -15,7 +13,7 @@ class RecordState extends Equatable {
   @override
   List<Object> get props => [times, numbers];
 
-  RecordState copyWith({List<int> numbers}) {
+  RecordState copyWith({List<int>? numbers}) {
     return RecordState(
       times: times + 1,
       numbers: numbers ?? this.numbers,

@@ -11,8 +11,8 @@ This repository contains examples used in my articles below:
 * bloc
   * An example of the BLoC pattern.
 
-* bloc2
-  * An example of the BLoC pattern powered by the [bloc_pattern](https://pub.dartlang.org/packages/bloc_provider) package.
+* ~~bloc2~~
+  * Removed.
 
 * bloc3
   * An example of the BLoC pattern powered by the [provider](https://pub.dev/packages/provider) package.

@@ -6,18 +6,22 @@ import 'package:bloc5/bloc/record_bloc.dart';
 import 'package:bloc5/model/calc_model.dart';
 import 'package:bloc5/screen/home.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return MultiProvider(
       providers: [
-        Provider<RecordBloc>(
+        Provider(
           create: (context) => RecordBloc(),
           dispose: (_, bloc) => bloc.dispose(),
         ),
-        Provider<CalcBloc>(
+        Provider(
           create: (context) => CalcBloc(
             calcModel: CalcModel(),
             recordBloc: context.read<RecordBloc>(),
@@ -27,14 +31,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.green).copyWith(
-          textTheme: Theme.of(context).textTheme.copyWith(
-                bodyText2: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .copyWith(fontSize: 18.0),
-              ),
+          textTheme: textTheme.copyWith(
+            bodyMedium: textTheme.bodyMedium?.copyWith(fontSize: 18.0),
+          ),
         ),
-        home: HomeScreen(),
+        home: const HomeScreen(),
       ),
     );
   }

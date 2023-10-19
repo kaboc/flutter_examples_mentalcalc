@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:bloc5/bloc/record_bloc.dart';
@@ -9,7 +8,7 @@ import 'package:bloc5/model/calc_model.dart';
 export 'package:bloc5/common/challenge_status.dart';
 
 class CalcBloc {
-  CalcBloc({@required this.calcModel, @required this.recordBloc}) {
+  CalcBloc({required this.calcModel, required this.recordBloc}) {
     _startController.stream.listen((_) {
       if (_status != ChallengeStatus.challenge) {
         _challenge();
@@ -43,7 +42,7 @@ class CalcBloc {
 
     calcModel.challenge(
       numbers: numbers,
-      onNext: (number) => _onNext(number),
+      onNext: _onNext,
       onEnd: () => _onEnd(numbers),
     );
   }

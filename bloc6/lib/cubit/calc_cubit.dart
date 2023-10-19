@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 
 import 'package:bloc6/common/challenge_status.dart';
@@ -9,7 +8,7 @@ export 'package:bloc6/common/challenge_status.dart';
 export 'package:bloc6/model/calc_state.dart';
 
 class CalcCubit extends Cubit<CalcState> {
-  CalcCubit({@required this.calcModel}) : super(CalcState.none);
+  CalcCubit({required this.calcModel}) : super(CalcState.none);
 
   final CalcModel calcModel;
 
@@ -20,7 +19,7 @@ class CalcCubit extends Cubit<CalcState> {
 
     calcModel.challenge(
       numbers: numbers,
-      onNext: (number) => _onNext(number),
+      onNext: _onNext,
       onEnd: () => _onEnd(numbers),
     );
   }

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:bloc5/bloc/record_bloc.dart';
 
 class RecordScreen extends StatelessWidget {
-  const RecordScreen();
+  const RecordScreen({super.key});
 
   static Route<void> route() {
     return MaterialPageRoute<void>(
@@ -20,24 +20,26 @@ class RecordScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Center(
-          child: StreamBuilder<RecordState>(
+          child: StreamBuilder(
             stream: context.watch<RecordBloc>().record,
             initialData: RecordState.none,
             builder: (_, snapshot) {
+              final data = snapshot.data!;
+
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text('You have tried ${snapshot.data.times} times.'),
+                children: [
+                  Text('You have tried ${data.times} times.'),
                   const SizedBox(height: 36.0),
-                  if (snapshot.data.numbers.isNotEmpty) ...[
+                  if (data.numbers.isNotEmpty) ...[
                     const Text('Last challenge'),
                     const SizedBox(height: 8.0),
-                    for (int v in snapshot.data.numbers) Text(v.toString()),
-                    SizedBox(
+                    for (int v in data.numbers) Text('$v'),
+                    const SizedBox(
                       width: 80.0,
                       child: Divider(color: Colors.black),
                     ),
-                    Text(snapshot.data.sum.toString()),
+                    Text('${data.sum}'),
                   ],
                 ],
               );

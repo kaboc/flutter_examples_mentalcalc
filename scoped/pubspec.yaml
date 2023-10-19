@@ -1,13 +1,16 @@
 name: scoped
 description: A new Flutter project.
-
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  scoped_model: ^1.0.1
+  scoped_model: ^2.0.0
+
+dev_dependencies:
+  flutter_lints: ^2.0.3

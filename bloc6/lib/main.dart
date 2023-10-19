@@ -6,35 +6,36 @@ import 'package:bloc6/cubit/record_cubit.dart';
 import 'package:bloc6/model/calc_model.dart';
 import 'package:bloc6/screen/home.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return MultiBlocProvider(
       providers: [
-        BlocProvider<CalcCubit>(
+        BlocProvider(
           create: (context) => CalcCubit(
             calcModel: CalcModel(),
           ),
         ),
-        BlocProvider<RecordCubit>(
+        BlocProvider(
           lazy: false,
           create: (context) => RecordCubit(
-            calcCubit: context.bloc<CalcCubit>(),
+            calcCubit: context.read<CalcCubit>(),
           ),
         ),
       ],
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.green).copyWith(
-          textTheme: Theme.of(context).textTheme.copyWith(
-                bodyText2: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .copyWith(fontSize: 18.0),
-              ),
+          textTheme: textTheme.copyWith(
+            bodyMedium: textTheme.bodyMedium?.copyWith(fontSize: 18.0),
+          ),
         ),
-        home: HomeScreen(),
+        home: const HomeScreen(),
       ),
     );
   }

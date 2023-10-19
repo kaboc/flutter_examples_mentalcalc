@@ -4,15 +4,14 @@ import 'calc_bloc.dart';
 export 'calc_bloc.dart';
 
 class CalcBlocProvider extends InheritedWidget {
-  const CalcBlocProvider({Key key, Widget child})
-      : super(key: key, child: child);
+  const CalcBlocProvider({super.key, required super.child});
 
   CalcBloc get bloc => CalcBloc();
 
   @override
-  bool updateShouldNotify(oldWidget) => false;
+  bool updateShouldNotify(InheritedWidget oldWidget) => false;
 
-  static CalcBlocProvider of(BuildContext context) {
+  static CalcBlocProvider? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<CalcBlocProvider>();
   }
 }

@@ -18,18 +18,17 @@ class CalcModel {
   }
 
   void challenge({
-    @required List<int> numbers,
-    @required void Function(int) onNext,
-    @required VoidCallback onEnd,
+    required List<int> numbers,
+    required void Function(int) onNext,
+    required VoidCallback onEnd,
   }) {
-    Timer.periodic(const Duration(seconds: 1), (Timer t) {
+    Timer.periodic(const Duration(seconds: 1), (t) {
       final index = t.tick - 1;
 
       if (index < numbers.length) {
         onNext(numbers[index]);
       } else {
         t.cancel();
-
         onEnd();
       }
     });
